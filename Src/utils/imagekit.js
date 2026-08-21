@@ -56,4 +56,23 @@ const uploadOnImageKit = async (localFilePath) => {
     }
 };
 
-export { uploadOnImageKit };
+const deleteFromImageKit = async (fileId) => {
+    try {
+        if (!fileId) {
+            console.log("❌ No fileId received for deletion");
+            return null;
+        }
+
+        const response = await imagekit.deleteFile(fileId);
+        console.log("✅ IMAGEKIT FILE DELETED:", fileId);
+        return response;
+    } catch (error) {
+        console.log("\n========== IMAGEKIT DELETE ERROR ==========");
+        console.log("MESSAGE:", error.message);
+        console.dir(error, { depth: null });
+        console.log("=============================================\n");
+        return null;
+    }
+};
+
+export { uploadOnImageKit, deleteFromImageKit };
